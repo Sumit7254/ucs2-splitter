@@ -1,0 +1,25 @@
+
+def calculate_ucs2_parts(text):
+    """
+    Calculate how many SMS parts a UCS2 message will use.
+    :param text: The message content (string)
+    :return: Number of SMS parts
+    """
+    ucs2_char_limit_single = 70
+    ucs2_char_limit_multi = 67  # For concatenated messages
+
+    length = len(text)
+    if length <= ucs2_char_limit_single:
+        return 1
+    else:
+        return (length + ucs2_char_limit_multi - 1) // ucs2_char_limit_multi
+
+if __name__ == "__main__":
+    print("UCS2 Content Splitter Checker")
+    while True:
+        message = input("\nEnter your message (or type 'exit' to quit):\n> ")
+        if message.lower() == 'exit':
+            break
+        parts = calculate_ucs2_parts(message)
+        print(f"Message length: {len(message)} characters")
+        print(f"Estimated SMS parts (UCS2): {parts}")
